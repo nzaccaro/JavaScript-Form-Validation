@@ -1,0 +1,28 @@
+body 
+{
+  background-color: lightblue;
+}
+h1 
+{
+  color: blue;
+  text-align: center;
+}
+p 
+{
+  color: white;
+}
+form
+{
+	text-align: center;
+}
+hr
+{
+	border: 2px solid white;
+}
+button
+{
+	cursor: pointer;
+	color: black;
+	border: none;
+	padding: 10px 15px;
+}

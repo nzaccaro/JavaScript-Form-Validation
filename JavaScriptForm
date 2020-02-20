@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="StyleSheet.css">
+	<title>Customer Information</title>
+
+	<!--Javascript Code-->
+	<script>
+		<!--Create array for error messages-->
+		var divs = ["errFirst", "errLast", "errEmail"];
+
+		<!--Function to check the input from user-->
+		function validateForm()
+		{	
+			<!--Reading the inputs from user-->
+			var inp = [];
+			inp[0] = document.getElementById("fName").value;
+			inp[1] = document.getElementById("lName").value;
+			inp[2] = document.getElementById("email").value;
+
+			<!--Create an array for the error displays-->
+			var errs = [];
+			errs[0] = "<span style='color:blue'> Enter your first name!</span>"
+			errs[1] = "<span style='color:blue'> Enter your last name!</span>"
+			errs[2] = "<span style='color:blue'> Enter your email address!</span>"
+			
+			<!--For loop to check the inputs-->
+			var count;
+			for (count=0; count<inp.length; count++)
+			{
+				var errMessage = errs[count];
+				var entry = divs[count];
+
+				if (inp[count] == "")
+					document.getElementById(entry).innerHTML = errMessage;
+				else if (count == 2)
+				{
+					<!--Checks if email is valid-->
+					var atPosition = inp[count].indexOf("@");  
+					var lastPosition = inp[count].lastIndexOf(".");
+
+					if (atPosition < 1 || lastPosition < atPosition + 2 || lastPosition >= inp[count].length)
+					{
+						document.getElementById(entry).innerHTML = "<span style = 'color:blue' > Enter a valid email address!</span>";
+					}
+					else
+					{
+						document.getElementById(entry).innerHTML = "Good!";
+					}
+				}
+				else
+				{
+					document.getElementById(entry).innerHTML = "Good!";
+				}
+			}
+		}
+
+		<!--Function to do final checks of inputs-->
+		function finalValidation()
+		{
+			var counts;
+			var check = 1;
+			for (counts=0; counts<divs.length; counts++)
+			{
+				if (document.getElementById(divs[counts]).innerHTML != "Good!")
+				{
+					check = 0;
+				}
+			}
+
+			if (check == 1)
+			{
+				document.getElementById("errFinal").innerHTML = "All the data you entered is correct!";
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h1>Customer Information</h1>
+	<hr>
+	<table>
+		<tr>
+			<td> First Name:</td>
+			<td><input type="text" id="fName" onkeyup="validateForm();"/></td>
+			<td><div id="errFirst"></div></td>
+		</tr>
+		<tr>
+			<td> Last Name:</td>
+			<td><input type="text" id="lName" onkeyup="validateForm();"/></td>
+			<td><div id="errLast"></div></td>
+		</tr>
+		<tr>
+			<td> Email:</td>
+			<td><input type="text" id="email" onkeyup="validateForm();"/></td>
+			<td><div id="errEmail"></div></td>
+		</tr>
+		<tr>
+			<td><input type="button" id="create" value="Create" onclick="validateForm();finalValidation();"/></td>
+			<td><div id="errFinal"></div></td>
+		</tr>
+	</table>
+</body>
+
+
+</html>
